@@ -1,0 +1,49 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/gallery"
+public_folder: "/images/gallery"
+
+collections:
+  - name: "gallery"
+    label: "Exclusive Gallery"
+    files:
+      - name: "gallery"
+        label: "Gallery"
+        file: "gallery-data.json"
+        fields:
+          - label: "Images"
+            name: "images"
+            widget: "list"
+            summary: "{{fields.caption}}"
+            fields:
+              - {label: "Photo", name: "src", widget: "image"}
+              - {label: "Caption", name: "caption", widget: "string", required: false}
+
+  - name: "story"
+    label: "Featured Story"
+    files:
+      - name: "story"
+        label: "Now Running"
+        file: "story-data.json"
+        fields:
+          - {label: "Kicker (e.g. Chapter 4 of 4, Final)", name: "kicker", widget: "string"}
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Synopsis", name: "synopsis", widget: "text"}
+          - {label: "Instagram Link", name: "link", widget: "string"}
+
+  - name: "archive"
+    label: "Story Archive"
+    files:
+      - name: "archive"
+        label: "Archive"
+        file: "archive-data.json"
+        fields:
+          - label: "Arcs"
+            name: "arcs"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Chapter count / status", name: "chapters", widget: "string"}
