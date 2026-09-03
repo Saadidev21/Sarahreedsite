@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sarah Reed — Stories</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,450;9..144,600;9..144,700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- GOOGLE ANALYTICS — Measurement ID: G-27C4T3TLGV -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-27C4T3TLGV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-27C4T3TLGV');
+
+  // click tracking — fires an event to GA every time a visitor taps
+  // a Follow / story / gallery link, so you can see conversion, not just visits
+  function trackClick(label){
+    gtag('event', 'bio_link_click', { 'link_label': label });
+  }
+</script>
+
+<!-- Netlify Identity — needed so invite/login links work correctly across the site -->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; });
+      }
+    });
+  }
+</script>
+
+<style>
+  :root{
+    --ink:#1C1512; --paper:#F1E6D3; --paper-2:#E8D9BE;
+    --gold:#C68A3E; --gold-bright:#DDA652; --wine:#6E2430;
+    --clay:#B98268; --text:#2A211C; --text-soft:#5C4E43;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--ink); color:var(--paper); font-family:'Instrument Sans',sans-serif; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1000px; margin:0 auto; padding:0 22px;}
+
+  header{padding:40px 0 24px; text-align:center;}
+  .name{font-family:'Fraunces',serif; font-weight:600; font-size:30px; letter-spacing:0.01em;}
+  .tag{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--clay); margin-top:8px;}
+  .follow-btn{
+    display:inline-block; margin-top:20px; padding:12px 26px; border:1px solid var(--gold-bright);
+    border-radius:2px; color:var(--gold-bright); text-decoration:none; font-size:13px;
+    font-family:'JetBrains Mono',monospace; letter-spacing:0.05em; transition:all .15s ease;
+  }
+  .follow-btn:hover{background:var(--gold-bright); color:var(--ink);}
+
+  /* story panel */
+  .story-panel{
+    margin:34px 0; padding:30px; border:1px solid rgba(241,230,211,0.15); border-radius:4px;
+    background:linear-gradient(160deg, rgba(110,36,48,0.25), rgba(28,21,18,0));
+  }
+  .story-kicker{font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold-bright);}
+  .story-title{font-family:'Fraunces',serif; font-style:italic; font-weight:500; font-size:24px; margin:8px 0 10px;}
+  .story-syn{font-size:14.5px; line-height:1.7; color:rgba(241,230,211,0.8); max-width:560px;}
+  .story-cta{
+    display:inline-block; margin-top:16px; font-size:12.5px; font-family:'JetBrains Mono',monospace;
+    color:var(--paper); border-bottom:1px solid var(--gold-bright); padding-bottom:2px; text-decoration:none;
+  }
+
+  /* gallery grid */
+  .section-label{
+    font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--clay); margin:38px 0 14px; display:flex; justify-content:space-between; align-items:center;
+    border-bottom:1px solid rgba(241,230,211,0.12); padding-bottom:10px;
+  }
+  .section-note{font-size:12.5px; color:rgba(241,230,211,0.55); margin:-6px 0 16px; line-height:1.6; max-width:560px;}
+  .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:6px;}
+  .tile{position:relative; aspect-ratio:4/5; overflow:hidden; border-radius:2px; background:#2b231d;}
+  .tile img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s ease;}
+  .tile:hover img{transform:scale(1.04);}
+  .tile-label{
+    position:absolute; bottom:8px; left:8px; font-family:'JetBrains Mono',monospace; font-size:9.5px;
+    letter-spacing:0.06em; text-transform:uppercase; color:rgba(241,230,211,0.85);
+    background:rgba(28,21,18,0.55); padding:3px 7px; border-radius:2px; max-width:calc(100% - 16px);
+  }
+  .placeholder{
+    display:flex; align-items:center; justify-content:center; flex-direction:column; gap:6px;
+    background:repeating-linear-gradient(135deg, #2b231d, #2b231d 10px, #241d18 10px, #241d18 20px);
+  }
+  .placeholder span{font-family:'JetBrains Mono',monospace; font-size:9.5px; color:rgba(241,230,211,0.35); letter-spacing:0.06em; text-align:center; padding:0 10px;}
+
+  footer{
+    text-align:center; padding:44px 0 50px; margin-top:20px; border-top:1px solid rgba(241,230,211,0.1);
+    font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--clay); letter-spacing:0.05em;
+  }
+
+  @media (max-width:600px){
+    .grid{grid-template-columns:repeat(2,1fr);}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="name">Sarah Reed</div>
+    <div class="tag">Short Stories · AI Visuals</div>
+    <a class="follow-btn" href="https://instagram.com/Sarahreed8207" target="_blank" onclick="trackClick('header_follow')">Follow on Instagram →</a>
+  </header>
+
+  <!-- FEATURED STORY — content loaded from story-data.json, editable at /admin -->
+  <div class="story-panel">
+    <div class="story-kicker" id="story-kicker">Loading…</div>
+    <div class="story-title" id="story-title"></div>
+    <p class="story-syn" id="story-syn"></p>
+    <a class="story-cta" id="story-cta" href="#" target="_blank" onclick="trackClick('story_cta')">Read on Instagram →</a>
+  </div>
+
+  <!-- EXCLUSIVE GALLERY — content loaded from gallery-data.json, editable at /admin -->
+  <div class="section-label"><span>Exclusive</span><span id="gallery-count">0 images</span></div>
+  <p class="section-note">Portraits and shots that don't make it to the Instagram feed. Updated as new ones are ready.</p>
+  <div class="grid" id="gallery-grid"></div>
+
+  <!-- STORY ARCHIVE — content loaded from archive-data.json, editable at /admin -->
+  <div class="section-label"><span>Story Archive</span><span id="archive-count">0 arcs</span></div>
+  <div class="grid" id="archive-grid"></div>
+
+  <footer>Sarah Reed — Updated weekly · @Sarahreed8207</footer>
+
+</div>
+
+<script>
+  // Loads editable content from the JSON files Decap CMS manages at /admin.
+  // Falls back to placeholder tiles when a section is still empty.
+
+  fetch('story-data.json').then(r => r.json()).then(s => {
+    document.getElementById('story-kicker').textContent = s.kicker || '';
+    document.getElementById('story-title').textContent = '"' + (s.title || '') + '"';
+    document.getElementById('story-syn').textContent = s.synopsis || '';
+    const cta = document.getElementById('story-cta');
+    cta.href = s.link || '#';
+    cta.textContent = 'Read on Instagram →';
+  }).catch(() => {});
+
+  fetch('gallery-data.json').then(r => r.json()).then(g => {
+    const grid = document.getElementById('gallery-grid');
+    const images = (g.images || []);
+    document.getElementById('gallery-count').textContent = images.length + (images.length === 1 ? ' image' : ' images');
+    if (images.length === 0) {
+      grid.innerHTML = '<div class="tile placeholder"><span>Send a photo<br>+ caption</span></div>'.repeat(3);
+      return;
+    }
+    grid.innerHTML = images.map(img => `
+      <div class="tile">
+        <img src="${img.src}" alt="${img.caption || ''}">
+        ${img.caption ? `<span class="tile-label">${img.caption}</span>` : ''}
+      </div>
+    `).join('');
+  }).catch(() => {});
+
+  fetch('archive-data.json').then(r => r.json()).then(a => {
+    const grid = document.getElementById('archive-grid');
+    const arcs = (a.arcs || []);
+    document.getElementById('archive-count').textContent = arcs.length + (arcs.length === 1 ? ' arc' : ' arcs');
+    grid.innerHTML = arcs.map(arc => `
+      <div class="tile placeholder"><span>${arc.title}<br>${arc.chapters}</span></div>
+    `).join('') + '<div class="tile placeholder"><span>Add next<br>arc</span></div>'.repeat(Math.max(0, 3 - arcs.length));
+  }).catch(() => {});
+</script>
+
+</body>
+</html>
